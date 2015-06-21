@@ -1,13 +1,19 @@
 # Given a search query, find the most relevant youtube video
 #    related to that search. Returns the title, description,
-#    id, and URL of that video
+#    id, and URL of that video. Then downloads that video as mp3
 
 # Youtube developer documentation:
 # https://developers.google.com/youtube/v3/getting-started
 # https://developers.google.com/youtube/v3/docs/search/list
 
+# Youtube-dl library documentation:
+# https://github.com/rg3/youtube-dl/blob/master/README.md
+
+from __future__ import unicode_literals
 from apiclient.discovery import build
 from apiclient.errors import HttpError
+import youtube_dl
+
 
 DEVELOPER_KEY = "AIzaSyDi_wkk3TXvoNp8J-wDvfaGJgsHvxbKmkI"
 YOUTUBE_API_SERVICE_NAME = "youtube"
@@ -30,15 +36,22 @@ def youtube_search(query):
 		title = search_result[0]["snippet"]["title"]
 		description = search_result[0]["snippet"]["description"]
 		id = search_result[0]["id"]["videoId"]
-		url = "https://www.youtube.com/watch?v=" + id
+		url = 'https://www.youtube.com/watch?v=' + id
 		print "Title: " + title
-		print "Description: " + description
-		print "ID: " + id
 		print "URL: " + url
+		ydl_opts = {
+			'format': 'bestaudio/best',
+			'postprocessors': [{
+				'key': 'FFmpegExtractAudio',
+				'preferredcodec': 'mp3',
+			}],
+		}
+		with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+			ydl.download([url])
 
 if __name__ == "__main__":
 	try:
-		search_terms = "leeroy jenkins"
+		search_terms = "darude sandstorm"
 		youtube_search(search_terms.decode("utf-8").replace(" ","+"))
 	except HttpError, e:
 		print "An HTTP error %d occurred:\n%s" % (e.resp.status, e.content)

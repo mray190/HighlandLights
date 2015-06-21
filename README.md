@@ -20,15 +20,12 @@ Scripts:<br>
 ##Setting up dev environment
 <ol>
 <li>Install python</li>
-<li>@deprecated: Install <a href="https://developers.google.com/gdata/articles/python_client_lib#library">Google Data API</a> (for youtube interaction)</li>
 <li>Install <i>pip install --upgrade google-api-python-client</i> for additional google python libraries</li>
+<li>Install <i>pip install youtube-dl</i></li>
 </ol>
 
 ## Scripts
 #### YoutubeParser.py
 Given a search query, find the most relevant youtube video 
 related to that search. Returns the title, description,
-id, and URL of that video
-
-#### YoutubeScraper.py
-Give the url of a youtube video, download the mp3 to the directed file
+id, and URL of that video. Then downloads that video as mp3
