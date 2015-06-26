@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # Given a search query, find the most relevant youtube video
 #    related to that search. Returns the title, description,
 #    id, and URL of that video. Then downloads that video as mp3
@@ -13,7 +15,8 @@ from __future__ import unicode_literals
 from apiclient.discovery import build
 from apiclient.errors import HttpError
 import youtube_dl
-
+import sys
+import os
 
 DEVELOPER_KEY = "AIzaSyDi_wkk3TXvoNp8J-wDvfaGJgsHvxbKmkI"
 YOUTUBE_API_SERVICE_NAME = "youtube"
@@ -45,13 +48,16 @@ def youtube_search(query):
 				'key': 'FFmpegExtractAudio',
 				'preferredcodec': 'mp3',
 			}],
+    			'outtmpl': os.path.join('Songs/', '%(title)s-%(id)s.%(ext)s'),
+    			'nocheckcertificate': True,
 		}
 		with youtube_dl.YoutubeDL(ydl_opts) as ydl:
 			ydl.download([url])
 
 if __name__ == "__main__":
 	try:
-		search_terms = "darude sandstorm"
+		search_terms = sys.argv[1]
+		print "Search term:", search_terms
 		youtube_search(search_terms.decode("utf-8").replace(" ","+"))
 	except HttpError, e:
 		print "An HTTP error %d occurred:\n%s" % (e.resp.status, e.content)
