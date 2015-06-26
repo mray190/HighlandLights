@@ -23,6 +23,7 @@ Scripts:<br>
 <li>Install <i>pip install --upgrade google-api-python-client</i> for additional google python libraries</li>
 <li>Install <i>pip install youtube-dl</i></li>
 <li>Install <i>pip install twilio</i></li>
+<li>Install <i>pip install flask</i></li>
 </ol>
 
 ## Scripts
