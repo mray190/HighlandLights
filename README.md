@@ -20,10 +20,13 @@ Scripts:<br>
 ##Setting up dev environment
 <ol>
 <li>Install python</li>
-<li>Install <i>pip install --upgrade google-api-python-client</i> for additional google python libraries</li>
-<li>Install <i>pip install youtube-dl</i></li>
-<li>Install <i>pip install twilio</i></li>
-<li>Install <i>pip install flask</i></li>
+<li>Install pip<ul>
+<li><i>wget https://bootstrap.pypa.io/get-pip.py</i></li>
+<li><i>sudo python get-pip.py</i></li></ul>
+<li>Install <i>sudo pip install --upgrade google-api-python-client</i> for additional google python libraries</li>
+<li>Install <i>sudo pip install youtube-dl</i></li>
+<li>Install <i>sudo pip install twilio</i></li>
+<li>Install <i>sudo pip install flask</i></li>
 </ol>
 
 ## Scripts
